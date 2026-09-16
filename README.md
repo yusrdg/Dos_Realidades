@@ -1,2 +1,2 @@
-# -Dos-realidades-Infinitas-realidades
+# ¿Dos realidades? Infinitas realidades
 editar
