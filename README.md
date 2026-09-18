@@ -9,7 +9,7 @@ Proyecto de **Yurineth Vargas** — Ejercicio_02 · DPPI_2026 · Diseño UDP.
 ## Ver la demo
 
 Repositorio GitHub: `https://github.com/yusrdg/Dos_Realidades`
-Publicado con GitHub Pages: `https://yusrdg.github.io/Dos_Realidades/`
+Publicado con GitHub Pages: `Aún no siponible`
 
 ## Estructura
 
@@ -77,14 +77,6 @@ python -m http.server 8000
 
 Y abre `http://localhost:<puerto>`. GitHub Pages ya sirve el sitio por
 `https://`, así que la demo publicada funcionará sin pasos extra.
-
-## Publicar en GitHub Pages
-
-1. Crea un repositorio y sube el contenido de esta carpeta a la raíz
-   (o a una rama `gh-pages` / carpeta `docs`, según prefieras).
-2. En **Settings → Pages**, elige la rama y carpeta desde donde servir.
-3. Espera unos minutos y tu sitio quedará disponible en
-   `https://<tu-usuario>.github.io/<tu-repo>/`.
 
 ## Créditos de color
 
