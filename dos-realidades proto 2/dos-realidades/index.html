@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Dos realidades son infinitas realidades</title>
+<meta name="description" content="Dos realidades son infinitas realidades — MediaPipe y OpenCV deconstruyendo la realidad visual." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Intel+One+Mono:wght@400;700&family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700;800;900&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- ============================================================ -->
+<!-- PANTALLA 1 — INTRO                                            -->
+<!-- ============================================================ -->
+<section id="intro" class="screen intro">
+  <div class="blob-field" aria-hidden="true">
+    <div class="blob blob--1"></div>
+    <div class="blob blob--2"></div>
+    <div class="blob blob--3"></div>
+    <div class="blob blob--4"></div>
+  </div>
+
+  <div class="intro-card glass">
+    <p class="intro-card__text">
+      Inicia tu captura de video y descubre cómo dos arquitecturas líderes de
+      visión computacional deconstruyen e interpretan la “realidad visual” que solías conocer.
+    </p>
+    <img class="intro-card__rule" src="assets/icon-underline.svg" alt="" aria-hidden="true" />
+    <button id="btnContinuar" class="intro-card__cta" type="button">
+      <span>Continuar</span>
+      <img src="assets/icon-arrow-right.svg" alt="" aria-hidden="true" />
+    </button>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- PANTALLA 2 — EXPERIENCIA                                       -->
+<!-- ============================================================ -->
+<section id="main" class="screen main">
+  <div class="blob-field blob-field--main" aria-hidden="true">
+    <div class="blob blob--m1"></div>
+    <div class="blob blob--m2"></div>
+    <div class="blob blob--m3"></div>
+    <div class="blob blob--m4"></div>
+    <div class="blob blob--m5"></div>
+  </div>
+
+  <header class="topbar">
+    <p class="topbar__label">DISPOSITIVOS PERIFÉRICOS Y PLATAFORMAS PARA LA INTERACCIÓN</p>
+  </header>
+
+  <div class="main__inner">
+
+    <h1 class="title"><span class="title__gradient">DOS REALIDADES SON INFINITAS REALIDADES</span></h1>
+
+    <div class="camera-control">
+      <p class="camera-control__label">Enciende tu cámara para empezar</p>
+      <button id="cameraToggle" class="toggle" type="button" role="switch" aria-checked="false" aria-label="Encender cámara">
+        <span class="toggle__track">
+          <img class="toggle__knob" src="assets/icon-toggle-knob.svg" alt="" aria-hidden="true" />
+        </span>
+      </button>
+      <p class="camera-control__state" id="cameraState">Cámara apagada</p>
+    </div>
+
+    <video id="sourceVideo" playsinline autoplay muted class="visually-hidden"></video>
+
+    <div class="cards-grid">
+      <article class="demo-card" data-demo="mediapipe">
+        <div class="demo-card__stage">
+          <canvas id="canvasMediapipe" width="960" height="720"></canvas>
+          <div class="demo-card__empty">
+            <p>Enciende tu cámara para ver esta realidad</p>
+          </div>
+          <button class="demo-card__how" data-overlay="overlayMediapipe" type="button">
+            ¿Cómo funciona?
+          </button>
+        </div>
+        <p class="demo-card__name">MediaPipe</p>
+      </article>
+
+      <article class="demo-card" data-demo="opencv">
+        <div class="demo-card__stage">
+          <canvas id="canvasOpencv" width="960" height="720"></canvas>
+          <div class="demo-card__empty">
+            <p>Enciende tu cámara para ver esta realidad</p>
+          </div>
+          <button class="demo-card__how" data-overlay="overlayOpencv" type="button">
+            ¿Cómo funciona?
+          </button>
+        </div>
+        <p class="demo-card__name">OpenCV</p>
+      </article>
+
+      <article class="demo-card demo-card--wide" data-demo="combo">
+        <div class="demo-card__stage">
+          <canvas id="canvasCombo" width="1280" height="720"></canvas>
+          <div class="demo-card__empty">
+            <p>Enciende tu cámara para ver esta realidad</p>
+          </div>
+          <div class="demo-card__combo-ui" id="comboUI">
+            <div class="combo-swatches">
+              <button class="combo-swatch combo-swatch--active" data-pen="0" style="--sw:#ff6464"></button>
+              <button class="combo-swatch" data-pen="1" style="--sw:#64ff64"></button>
+              <button class="combo-swatch" data-pen="2" style="--sw:#6464ff"></button>
+            </div>
+            <div class="combo-buttons">
+              <button id="comboPlay" class="combo-btn" type="button">Reproducir</button>
+              <button id="comboClear" class="combo-btn combo-btn--ghost" type="button">Borrar</button>
+            </div>
+          </div>
+          <button class="demo-card__how" data-overlay="overlayCombo" type="button">
+            ¿Cómo funciona?
+          </button>
+        </div>
+        <p class="demo-card__name">MediaPipe + OpenCV</p>
+      </article>
+    </div>
+
+    <div class="reveal">
+      <button id="revealToggle" class="reveal__trigger" type="button" aria-expanded="false" aria-controls="revealBody">
+        <span class="reveal__title">¿Qué es lo que ha sucedido?</span>
+        <div class="reveal__line"></div>
+        <svg class="reveal__chevron" width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M5 9L12 16L19 9" stroke="#853A76" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+
+      <div class="reveal__body" id="revealBody">
+        <div class="reveal__card glass">
+          <p>Nuestras máquinas perciben el mundo de una manera que nosotros, los seres humanos, no podemos. Sin embargo, podemos indicarles cómo queremos que vean el “mundo” y, a través de ellas, descubrir nuevas «realidades».</p>
+          <p>Es así como, a través del programa anterior, he comprendido las capacidades de MediaPipe y OpenCV. La primera permite ubicar distancias y reconocer distintas partes del cuerpo y objetos con gran detalle, mientras que la segunda, es capaz de procesar imágenes, permitiéndole interactuar con las características de estas.</p>
+          <p>Al igual que los seres humanos, las máquinas tienen sus propios límites, pero, a su vez, nos permiten explorar infinitas realidades y diversas formas de relacionarnos. Es mágico y hermoso… ¿no lo crees?</p>
+          <p>Y es aún más hermoso cuando comprendemos que, hoy en día, los límites de lo imposible son cada vez más difusos. Ahora podemos crear nuestras propias realidades y nuevas maneras de relacionarnos, no solo con otros seres humanos, ¡sino también con las máquinas!</p>
+          <p>¿Llegará algún día en que la palabra «imposible» desaparezca de nuestro lenguaje…?</p>
+          <p class="reveal__quote">«El arte da la posibilidad de mentir, de imaginar, de cambiar los esquemas».<br />— Cerati</p>
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <p><a href="https://github.com/yusrdg/Dos_Realidades" target="_blank" rel="noopener">Mi repositorio</a></p>
+      <p class="footer__credit">YURINETH VARGAS - EJERCICIO_02 -  DPPI_2026 - DISEÑO UDP</p>
+    </footer>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- OVERLAYS                                                      -->
+<!-- ============================================================ -->
+<div class="overlay-backdrop" id="overlayBackdrop"></div>
+
+<div class="overlay" id="overlayMediapipe" role="dialog" aria-modal="true" aria-labelledby="overlayMediapipeTitle">
+  <p id="overlayMediapipeTitle">
+    Al colocar tu mano frente a la cámara de tu dispositivo, el programa detectará la punta de tu dedo índice. Al moverlo, generará una línea que seguirá su recorrido. Procura que tu mano no salga del campo de visión y evita señalar directamente hacia la cámara, esto asegurará su buen funcionamiento.
+  </p>
+  <button class="overlay__close" type="button" aria-label="Cerrar">
+    <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M2 2L17 17M17 2L2 17" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"/>
+    </svg>
+  </button>
+</div>
+
+<div class="overlay overlay--short" id="overlayOpencv" role="dialog" aria-modal="true" aria-labelledby="overlayOpencvTitle">
+  <p id="overlayOpencvTitle">
+    Asegúrate de contar con una buena iluminación ¡y acción! El programa mostrará los tres colores principales en la escena frente a la cámara, junto con sus respectivos códigos en HEX.
+  </p>
+  <button class="overlay__close" type="button" aria-label="Cerrar">
+    <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M2 2L17 17M17 2L2 17" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"/>
+    </svg>
+  </button>
+</div>
+
+<div class="overlay overlay--short" id="overlayCombo" role="dialog" aria-modal="true" aria-labelledby="overlayComboTitle">
+  <p id="overlayComboTitle">
+    ¡Diviértete! Usando los valores obtenidos anteriormente mediante MediaPipe y OpenCV, hemos dado vida a un pequeño sintetizador que reacciona a los dibujos que realices en él.
+  </p>
+  <button class="overlay__close" type="button" aria-label="Cerrar">
+    <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M2 2L17 17M17 2L2 17" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"/>
+    </svg>
+  </button>
+</div>
+
+<!-- MediaPipe Hands (CDN) — usado en las pantallas "MediaPipe" y "MediaPipe + OpenCV" -->
+<script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js" crossorigin="anonymous"></script>
+<script src="script.js"></script>
+</body>
+</html>
