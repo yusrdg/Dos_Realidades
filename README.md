@@ -1,2 +1,3 @@
-# ¿Dos realidades? Infinitas realidades
+# Dos realidades son infinitas realidades
+
 editar
