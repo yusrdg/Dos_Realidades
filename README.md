@@ -9,7 +9,7 @@ Proyecto de **Yurineth Vargas** — Ejercicio_02 · DPPI_2026 · Diseño UDP.
 ## Ver la demo
 
 Repositorio GitHub: `https://github.com/yusrdg/Dos_Realidades`
-Publicado con GitHub Pages: `[Disponible pronto :D](https://yusrdg.github.io/Dos_Realidades/)`
+Publicado con GitHub Pages: `(https://yusrdg.github.io/Dos_Realidades/)`
 
 ## Estructura
 
