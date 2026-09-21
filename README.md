@@ -34,7 +34,7 @@ se incluye como referencia en `python-originales/`.
 |---|---|---|
 | **MediaPipe** | `DibujoManos.py` | Sigue la punta del dedo índice con MediaPipe Hands y dibuja una estela de partículas que se desvanece con el tiempo. |
 | **OpenCV** | `3colores.py` | Extrae, cada pocos fotogramas, los 3 colores dominantes de la imagen mediante K-Means y muestra su nombre y código hexadecimal. |
-| **MediaPipe + OpenCV** | `InstrumentoVisual.py` | Combina ambas: dibuja con el dedo usando colores extraídos en vivo de la cámara (K-Means) y convierte cada trazo en sonido al reproducirlo, según la altura y el lápiz usado. |
+| **MediaPipe + OpenCV** | `InstrumentoVisual.py` | Combina ambas: dibuja con el dedo usando colores extraídos en vivo de la cámara (K-Means) y convierte cada trazo en sonido al reproducirlo, según la altura, el color usado y cerrando el puño para levantar el pincel. |
 
 ### Decisiones de adaptación
 
