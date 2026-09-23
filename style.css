@@ -47,7 +47,6 @@ button { font-family: inherit; cursor: pointer; }
   overflow: hidden;
 }
 
-/* Transición tipo Dissolve de 400ms ease-in-out entre pantallas */
 html, body { height: auto; }
 #intro {
   position: fixed;
@@ -64,10 +63,11 @@ html, body { height: auto; }
 body.intro-active { overflow: hidden; }
 
 .glass {
-  background: rgba(255,255,255,0.45);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
-  border: 1px solid rgba(255,255,255,0.6);
+  background: linear-gradient(135deg, rgba(255,255,255,0.22), rgba(255,255,255,0.07));
+  backdrop-filter: blur(28px) saturate(145%);
+  -webkit-backdrop-filter: blur(28px) saturate(145%);
+  border: 1px solid rgba(255,255,255,0.52);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.22), 0 20px 60px rgba(0,0,0,0.30);
 }
 
 /* ============================================================
@@ -469,6 +469,7 @@ body.intro-active { overflow: hidden; }
 }
 .blob--m3 {
   left: 24%; bottom: -20%; top: auto; width: min(55vw, 840px); height: min(60vh, 600px);
+  background: var(--plum);
   opacity: 0.60;
   animation: drift-main-c-wide 10s ease-in-out infinite alternate;
 }
@@ -808,10 +809,11 @@ body.intro-active { overflow: hidden; }
   font-style: normal;
   font-weight: 400;
   line-height: 1.6;
-  background: rgba(255,255,255,0.34);
-  border: 1px solid rgba(255,255,255,0.60);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
+  background: linear-gradient(135deg, rgba(255,255,255,0.20), rgba(255,255,255,0.06));
+  border: 1px solid rgba(255,255,255,0.52);
+  backdrop-filter: blur(28px) saturate(145%);
+  -webkit-backdrop-filter: blur(28px) saturate(145%);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.22), 0 20px 60px rgba(0,0,0,0.30);
 }
 .reveal__card p {
   margin: 0 0 16px;
@@ -839,11 +841,11 @@ body.intro-active { overflow: hidden; }
   font-style: normal;
   font-weight: 400;
   line-height: normal;
-  opacity: 0.5;
-  color: #853A76;
+  opacity: 0.82;
+  color: #FFFFFF;
 }
 .footer a {
-  color: #853A76;
+  color: #FFFFFF;
   text-decoration: none;
   font-family: 'Inter', sans-serif;
   font-size: 13px;
@@ -854,7 +856,7 @@ body.intro-active { overflow: hidden; }
 }
 .footer__credit {
   margin-top: 6px;
-  color: #853A76;
+  color: #FFFFFF;
   font-family: 'Inter', sans-serif;
   font-size: 13px;
   font-weight: 400;
@@ -883,8 +885,8 @@ body.intro-active { overflow: hidden; }
   width: min(90vw, 560px);
   min-height: 180px;
   transform: translate(-50%, -50%) scale(.96);
-  background: rgba(75, 12, 59, 0.72);
-  border: 1px solid rgba(255, 255, 255, 0.46);
+  background: linear-gradient(135deg, rgba(133,58,118,0.62), rgba(75,12,59,0.46));
+  border: 1px solid rgba(255, 255, 255, 0.54);
   border-radius: var(--radius-md);
   box-shadow: 0 30px 70px rgba(0, 0, 0, 0.35);
   padding: 30px 36px 40px;
@@ -893,8 +895,8 @@ body.intro-active { overflow: hidden; }
   opacity: 0;
   pointer-events: none;
   transition: opacity .3s ease, transform .3s ease;
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(28px) saturate(145%);
+  -webkit-backdrop-filter: blur(28px) saturate(145%);
 }
 .overlay--short { min-height: 165px; }
 .overlay.is-visible {
