@@ -30,7 +30,7 @@ Hii! Mi nombre es Yuri y ya que estás aquí bienvenidx a mi proyecto de diseño
 
 Estos tres bloques son una adaptación a JavaScript, pensada para correr en el navegador, de tres programas que originalmente escribí en Python con OpenCV, MediaPipe y PyAudio. El código fuente en Python de cada uno se incluye como referencia en `python-originales/`.
 
-| Pantalla | Script Python original | Qué hace |
+| Pantalla | Script Python original | ¿Qué hace? |
 |---|---|---|
 | **MediaPipe** | `DibujoManos.py` | Sigue la punta del dedo índice de una de tus manos con MediaPipe Hands y dibuja una estela de partículas que se desvanece depués de 10seg, puedes cerrar el puño para dejar de dibujar o levantar el "pincel". |
 | **OpenCV** | `3colores.py` | Extrae, cada pocos fotogramas, los 3 colores dominantes de la imagen mediante K-Means y muestra su nombre y código hexadecimal. |
