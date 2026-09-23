@@ -36,20 +36,6 @@ Estos tres bloques son una adaptación a JavaScript, pensada para correr en el n
 | **OpenCV** | `3colores.py` | Extrae, cada pocos fotogramas, los 3 colores dominantes de la imagen mediante K-Means y muestra su nombre y código hexadecimal. |
 | **MediaPipe + OpenCV** | `InstrumentoVisual.py` | Combina ambas: dibuja con el dedo usando colores extraídos en vivo de la cámara (K-Means), usa tu puño para levantar el "pincel" y da click a los colores en la esquina superior izquierda para cambiar el sonido de cada trazo, o entre más alto o bajo este tu dibujo, diferente será el tono. |
 
-### Decisiones de adaptación
-
-- **MediaPipe Hands**: se usa la librería oficial `@mediapipe/hands` vía
-  CDN (jsDelivr), la misma tecnología del script en Python, corriendo
-  aquí directamente en el navegador.
-- **K-Means (OpenCV)**: en vez de cargar `opencv.js` completo (~8 MB)
-  solo para esta operación, se reimplementó el algoritmo K-Means en
-  JavaScript puro (`kMeans()` en `script.js`). El resultado es
-  equivalente al de `cv2.kmeans()`.
-- **PyAudio → Web Audio API**: la síntesis de audio en tiempo real se
-  reemplazó por osciladores de la Web Audio API (`OscillatorNode`),
-  usando `square`, `sine` y `sawtooth` para aproximar los timbres
-  "tecno", "pop" y "rock" del programa original.
-
 ## Créditos de color usados
 
 - Fondo: `#FFFFFF`
@@ -59,4 +45,7 @@ Estos tres bloques son una adaptación a JavaScript, pensada para correr en el n
 
 ---
 
-
+<div align="center">
+  <h3>«El arte te da la posibilidad de mentir, de imaginar, de cambiar los esquemas».</h3>
+  — Cerati
+</div>
