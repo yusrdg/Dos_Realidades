@@ -8,6 +8,8 @@
 
 Hii! Mi nombre es Yuri y ya que estás aquí bienvenidx a mi proyecto de diseño interactivo donde usando HTML/CSS/JS y 2 bibliotecas pioneras de la visión computacional he diseñado una página web capaz de deconstruir e interpretar la "realidad" que dices conocer usando sólo la cámara de tu navegador, uhum just like that!
 
+- Repo referencia: [dos-realidades](https://github.com/fefeliperoar/dos-realidades.git) ¡THXX PROFE FELIPE! <3
+
 ## ¿Cómo probarlo?
 
 - Repositorio GitHub: `https://github.com/yusrdg/Dos_Realidades`
