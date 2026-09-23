@@ -36,12 +36,16 @@ Estos tres bloques son una adaptación a JavaScript, pensada para correr en el n
 | **OpenCV** | `3colores.py` | Extrae, cada pocos fotogramas, los 3 colores dominantes de la imagen mediante K-Means y muestra su nombre y código hexadecimal. |
 | **MediaPipe + OpenCV** | `InstrumentoVisual.py` | Combina ambas: dibuja con el dedo usando colores extraídos en vivo de la cámara (K-Means), usa tu puño para levantar el "pincel" y da click a los colores en la esquina superior izquierda para cambiar el sonido de cada trazo, o entre más alto o bajo este tu dibujo, diferente será el tono. |
 
-## Créditos de color usados
+## Paleta de color usada
 
 - Fondo: `#FFFFFF`
 - Verde lima: `#B4CC4E`
 - Morado oscuro: `#4B0C3B`
 - Magenta: `#853A76`
+
+## Diagrama de flujo
+
+<img width="3204" height="2276" alt="dppi - Encargo 3" src="https://github.com/user-attachments/assets/0c986437-9c26-4b3c-9dc1-9421fa1f18c2" />
 
 ---
 
