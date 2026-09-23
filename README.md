@@ -56,3 +56,7 @@ Estos tres bloques son una adaptación a JavaScript, pensada para correr en el n
 - Verde lima: `#B4CC4E`
 - Morado oscuro: `#4B0C3B`
 - Magenta: `#853A76`
+
+---
+
+
