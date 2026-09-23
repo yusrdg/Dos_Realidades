@@ -1,30 +1,8 @@
-/* ============================================================
-   DOS REALIDADES SON INFINITAS REALIDADES
-   script.js
-   ------------------------------------------------------------
-   Adaptación a JavaScript (navegador) de tres programas Python
-   originales (OpenCV + MediaPipe + PyAudio):
-
-     DibujoManos.py       -> demo "mediapipe"  (estela de partículas)
-     3colores.py          -> demo "opencv"     (paleta K-Means)
-     InstrumentoVisual.py -> demo "combo"      (lienzo musical)
-
-   Notas de adaptación:
-   - El seguimiento de manos usa @mediapipe/hands (misma librería
-     que la versión de Python, aquí corriendo en el navegador).
-   - El K-Means de OpenCV (cv2.kmeans) se reimplementó en JS puro
-     (función kMeans más abajo) para evitar cargar opencv.js
-     (~8MB) solo para esta operación; el algoritmo es el mismo.
-   - PyAudio se reemplazó por la Web Audio API (osciladores).
-   ============================================================ */
-
 (() => {
   'use strict';
 
   /* ----------------------------------------------------------
-     0. INTRO: botón "Continuar" -> desvanecimiento hacia pantalla 2
-     (no es scroll: la intro se desvanece y debajo queda la pantalla
-     2, que sí es normalmente scrolleable)
+     0. INTRO
      ---------------------------------------------------------- */
   const introScreen = document.getElementById('intro');
   const btnContinuar = document.getElementById('btnContinuar');
@@ -66,7 +44,7 @@
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeAllOverlays(); });
 
   /* ----------------------------------------------------------
-     2. "¿Qué es lo que ha sucedido?" desplegable
+     2. "¿Qué es lo que ha sucedido?"
      ---------------------------------------------------------- */
   const revealToggle = document.getElementById('revealToggle');
   const revealBody = document.getElementById('revealBody');
@@ -132,8 +110,7 @@
     }
   }
 
-  // Reimplementación en JS de cv2.kmeans para paletas de color.
-  // pixels: Uint8ClampedArray plano [r,g,b,r,g,b,...]
+
   function kMeans(pixels, k = 3, iterations = 8) {
     const n = pixels.length / 3;
     if (n === 0) return [];
@@ -185,8 +162,6 @@
     return '#' + [r, g, b].map(v => v.toString(16).padStart(2, '0')).join('').toUpperCase();
   }
 
-  // Refleja solamente la imagen de cámara dentro de un canvas. La interfaz
-  // que se dibuja encima (texto, botones y controles) conserva su orientación.
   function drawMirroredVideo(ctx, canvas) {
     const { width: w, height: h } = canvas;
     ctx.save();
@@ -269,6 +244,9 @@
     cameraState.textContent = 'Cámara apagada';
     demoCards.forEach(c => c.dataset.active = 'false');
     if (state.rafId) cancelAnimationFrame(state.rafId);
+    trazosMP.length = 0;
+    trazoMPActivo = null;
+    particulas.length = 0;
     trazosCombo.length = 0;
     detenerAudio();
   }
@@ -278,14 +256,23 @@
   });
 
   /* ----------------------------------------------------------
-     5. DEMO 1 — MediaPipe: estela de partículas (DibujoManos.py)
+     5. DEMO 1 — MediaPipe: lienzo con estela (DibujoManos.py)
      ---------------------------------------------------------- */
   const canvasMP = document.getElementById('canvasMediapipe');
   const ctxMP = canvasMP.getContext('2d');
-  const TIEMPO_VIDA_LINEA = 2.0;
-  let puntosDibujo = [];
+  const TIEMPO_BORRADO_DIBUJO = 10.0;
+  const TIEMPO_VIDA_PARTICULA = 2.0;
+  let trazosMP = [];
+  let trazoMPActivo = null;
   let particulas = [];
   const COLOR_BASE = [100, 230, 255]; // r,g,b — celeste neón
+
+  function manoEnPuno(lm) {
+    // Un puño se reconoce cuando las cuatro puntas están por debajo de sus
+    // respectivos nudillos medios. Esa postura levanta el "pincel".
+    return [[8, 6], [12, 10], [16, 14], [20, 18]]
+      .every(([punta, nudillo]) => lm[punta].y > lm[nudillo].y);
+  }
 
   function updateMediapipeDemo(tNow) {
     const w = canvasMP.width, h = canvasMP.height;
@@ -293,13 +280,18 @@
     drawMirroredVideo(ctxMP, canvasMP);
 
     const hands = state.handsLandmarks;
-    if (hands && hands.length) {
-      hands.forEach(lm => {
+    const manoParaDibujar = hands?.find(lm => !manoEnPuno(lm));
+    if (manoParaDibujar) {
+        const lm = manoParaDibujar;
         const tip = lm[8];
-        // La cámara está reflejada en esta tarjeta: invertimos X para que
-        // la estela permanezca sobre la punta del dedo visible.
         const x = (1 - tip.x) * w, y = tip.y * h;
-        puntosDibujo.push({ x, y, t: tNow });
+        const punto = { x, y, t: tNow };
+        if (!trazoMPActivo) {
+          trazoMPActivo = [punto];
+          trazosMP.push(trazoMPActivo);
+        } else {
+          trazoMPActivo.push(punto);
+        }
         for (let i = 0; i < 4; i++) {
           particulas.push({
             x, y,
@@ -308,28 +300,31 @@
             t: tNow,
           });
         }
-      });
+    } else {
+      trazoMPActivo = null;
     }
 
-    puntosDibujo = puntosDibujo.filter(p => tNow - p.t < TIEMPO_VIDA_LINEA);
+    trazosMP = trazosMP.filter(trazo => {
+      const ultimo = trazo[trazo.length - 1];
+      return ultimo && tNow - ultimo.t < TIEMPO_BORRADO_DIBUJO;
+    });
     ctxMP.globalCompositeOperation = 'lighter';
-    for (let i = 1; i < puntosDibujo.length; i++) {
-      const a = puntosDibujo[i - 1], b = puntosDibujo[i];
-      if (b.t - a.t > 0.2) continue;
-      const vida = Math.max(0, 1 - (tNow - b.t) / TIEMPO_VIDA_LINEA);
-      if (vida <= 0) continue;
-      ctxMP.strokeStyle = `rgba(${COLOR_BASE[0]},${COLOR_BASE[1]},${COLOR_BASE[2]},${vida})`;
-      ctxMP.lineWidth = 7 * vida + 1;
-      ctxMP.lineCap = 'round';
-      ctxMP.beginPath();
-      ctxMP.moveTo(a.x, a.y);
-      ctxMP.lineTo(b.x, b.y);
-      ctxMP.stroke();
-    }
+    trazosMP.forEach(trazo => {
+      for (let i = 1; i < trazo.length; i++) {
+        const a = trazo[i - 1], b = trazo[i];
+        ctxMP.strokeStyle = `rgb(${COLOR_BASE[0]},${COLOR_BASE[1]},${COLOR_BASE[2]})`;
+        ctxMP.lineWidth = 7;
+        ctxMP.lineCap = 'round';
+        ctxMP.beginPath();
+        ctxMP.moveTo(a.x, a.y);
+        ctxMP.lineTo(b.x, b.y);
+        ctxMP.stroke();
+      }
+    });
 
-    particulas = particulas.filter(p => tNow - p.t < TIEMPO_VIDA_LINEA);
+    particulas = particulas.filter(p => tNow - p.t < TIEMPO_VIDA_PARTICULA);
     particulas.forEach(p => {
-      const vida = Math.max(0, 1 - (tNow - p.t) / TIEMPO_VIDA_LINEA);
+      const vida = Math.max(0, 1 - (tNow - p.t) / TIEMPO_VIDA_PARTICULA);
       p.x += p.vx; p.y += p.vy;
       const radio = 5 * vida + 1;
       ctxMP.fillStyle = `rgba(${COLOR_BASE[0]},${COLOR_BASE[1]},${COLOR_BASE[2]},${vida})`;
@@ -401,10 +396,7 @@
       ctxCV.fillText(hex, w * 0.06 + boxSize + 20, y + boxSize * 0.92);
     });
 
-    // Nota: esta pantalla muestra un panel de análisis (no el video
-    // en vivo), igual que la ventana original de 3colores.py.
-    // La imagen SÍ se sigue muestreando en vivo desde la cámara.
-    // No espejamos el texto: contrarrestamos el mirror CSS del stage.
+
   }
 
   /* ----------------------------------------------------------
