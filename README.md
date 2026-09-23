@@ -1,4 +1,6 @@
-# Dos realidades son infinitas realidades
+<img width="7555" height="250" alt="Titulo-2-realidades" src="https://github.com/user-attachments/assets/522bee87-3d96-4b22-b973-6bbbf1b86967" />
+
+---
 
 Sitio interactivo en HTML/CSS/JS que deconstruye e interpreta la "realidad
 visual" a través de dos arquitecturas de visión computacional —
