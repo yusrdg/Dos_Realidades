@@ -49,9 +49,12 @@ Estos tres bloques son una adaptación a JavaScript, pensada para correr en el n
 
 <img width="3204" height="2276" alt="dppi - Encargo 3" src="https://github.com/user-attachments/assets/0c986437-9c26-4b3c-9dc1-9421fa1f18c2" />
 
----
-
 <div align="center">
   <h3>«El arte te da la posibilidad de mentir, de imaginar, de cambiar los esquemas».</h3>
   — Cerati
 </div>
+
+--- 
+
+<p align="right">With luv Yuri 🌸</p>
+
