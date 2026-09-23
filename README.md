@@ -1,29 +1,30 @@
 <img width="7555" height="250" alt="Titulo-2-realidades" src="https://github.com/user-attachments/assets/522bee87-3d96-4b22-b973-6bbbf1b86967" />
 
+<div align="center">
+  <h3>TAREA 03</h3>
+</div>
+
 ---
 
-Sitio interactivo en HTML/CSS/JS que deconstruye e interpreta la "realidad
-visual" a través de dos arquitecturas de visión computacional —
-**MediaPipe** y **OpenCV**— usando la cámara del navegador.
+Hii! Mi nombre es Yurineth Vargas Salazar y ya que estás aquí bienvenidx a mi proyecto de diseño interactivo donde usando HTML/CSS/JS y 2 bibliotecas gigantescas de la visión computacional que deconstruyen e interpretan la "realidad" que dices conocer usando sólo la cámara de tu navegador, uhum just like that!
 
-Proyecto de **Yurineth Vargas** — Ejercicio_02 · DPPI_2026 · Diseño UDP.
+## ¿Cómo probarlo?
 
-## Ver la demo
+- Repositorio GitHub: `https://github.com/yusrdg/Dos_Realidades`
+- Publicado con GitHub Pages: `https://yusrdg.github.io/Dos_Realidades/`
 
-Repositorio GitHub: `https://github.com/yusrdg/Dos_Realidades`
-Publicado con GitHub Pages: `https://yusrdg.github.io/Dos_Realidades/`
 
-## Estructura
+## Estructura de archivos
 
-```
-dos-realidades/
-├── index.html            Marcado de las dos pantallas + overlays
-├── style.css              Estilos, animaciones de fondo y layout responsivo
-├── script.js               Lógica de cámara, overlays y las 3 demos
-├── assets/                 Iconos SVG exportados de Figma
-├── python-originales/      Scripts Python originales (referencia)
-└── README.md
-```
+| Archivo / Carpeta | Descripción |
+| :--- | :--- |
+| `index.html` | Elementos de página web, orden y llamados. |
+| `style.css` | Estilos, animaciones de fondo y layout responsivo. |
+| `script.js` | Lógica de cámara, overlays y las 3 demos. |
+| `assets/` | Iconos SVG exportados de Figma. |
+| `python-originales/` | Scripts Python originales de las demos. |
+| `README.md` | Here u are! es la documentación del proyecto. |
+
 
 ## Las 3 mini-pantallas
 
